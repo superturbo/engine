@@ -67,6 +67,9 @@ module Locomotive
     def localize_pages_and_content_entries(site, new_locales, previous_default_locale)
       return unless new_locales.present?
 
+      # set the fallbacks for the new locales, without it we will get an error when trying to localize the pages
+      set_fallbacks(site, new_locales)
+
       # localize all the existing pages
       page_service.site = site
       page_service.localize(new_locales, previous_default_locale)
@@ -81,6 +84,12 @@ module Locomotive
     def unique_handle
       Bazaar.heroku do |value|
         Site.where(handle: value).exists?
+      end
+    end
+
+    def set_fallbacks(site, new_locales)
+      new_locales.each do |locale|
+        ::Mongoid::Fields::I18n.fallbacks_for(locale, site.locale_fallbacks(locale))
       end
     end
 
