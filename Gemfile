@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'abbrev'
+
 group :development do
   gem 'debug', '~> 1.9.2'
   gem 'web-console', '~> 4.2.1'
@@ -21,7 +23,7 @@ group :development, :test do
   # gem 'locomotivecms_common', github: 'locomotivecms/common', ref: '054505c', require: false
 
   # gem 'locomotivecms_steam', path: '../steam', require: false
-  gem 'locomotivecms_steam', github: 'locomotivecms/steam', ref: 'ba10b57', require: false
+  gem 'locomotivecms_steam', github: 'locomotivecms/steam', ref: '023a424', require: false
 end
 
 group :test do

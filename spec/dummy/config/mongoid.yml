@@ -23,10 +23,10 @@ development:
         #   mode: :secondary_preferred
 
         # The name of the user for authentication.
-        # user: 'user'
+        user: <%= ENV['MONGO_USER'] %>
 
         # The password of the user for authentication.
-        # password: 'password'
+        password: <%= ENV['MONGO_PASSWORD'] %>
 
         # The user's database roles.
         # roles:
@@ -133,3 +133,6 @@ test:
       options:
         truncate_logs: false
         max_pool_size: 1
+        user: <%= ENV['MONGO_USER'] %>
+        password: <%= ENV['MONGO_PASSWORD'] %>
+      

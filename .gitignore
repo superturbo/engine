@@ -67,3 +67,4 @@ node_modules
 .byebug_history
 TODO.md
 app/javascript/src/locomotive/svg/generated
+mongodb_data/
