@@ -168,6 +168,18 @@ describe Locomotive::Concerns::Site::Metafields do
 
     end
 
+    context 'namespace and field names requiring normalization' do
+
+      # schema keeps the raw names; the stored values use the normalized keys
+      # (as persisted by the backoffice form / SiteMetafieldsService)
+      let(:namespace) { 'mailer_settings' }
+      let(:schema)    { [{ 'name' => 'Mailer_Settings', 'fields' => [{ 'name' => 'Address' }] }] }
+      let(:fields)    { { 'mailer_settings' => { 'address' => 'smtp.example.org' } } }
+
+      it { is_expected.to eq({ 'address' => 'smtp.example.org' }) }
+
+    end
+
   end
 
 end
