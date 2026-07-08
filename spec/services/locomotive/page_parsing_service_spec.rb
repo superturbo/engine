@@ -96,6 +96,38 @@ describe Locomotive::PageParsingService do
 
     end
 
+    # characterization: parsing errors (whatever the Liquid version raises)
+    # are swallowed by the service which logs them and returns nil instead
+    context 'the page template has a Liquid syntax error' do
+
+      let(:page_template) { '{% extends parent %}{% block body %}{{ foo {% endblock %}' }
+
+      before { allow(service).to receive(:puts) } # the rescue also writes to stdout
+
+      it 'logs the error and returns nil' do
+        expect(Rails.logger).to receive(:error).with(/\[PageParsing\]/)
+        expect(service.find_or_create_editable_elements(page)).to eq nil
+      end
+
+    end
+
+    context 'an included snippet has a Liquid syntax error' do
+
+      let(:broken_snippet) { create(:snippet, slug: 'broken_snippet', site: home.site, template: '{{ foo') }
+      let(:page_template)  { "{% block body %}{% include 'broken_snippet' %}{% endblock %}" }
+
+      before do
+        broken_snippet
+        allow(service).to receive(:puts) # the rescue also writes to stdout
+      end
+
+      it 'logs the error and returns nil' do
+        expect(Rails.logger).to receive(:error).with(/\[PageParsing\]/)
+        expect(service.find_or_create_editable_elements(page)).to eq nil
+      end
+
+    end
+
   end
 
   describe '#group_and_sort_editable_elements' do
