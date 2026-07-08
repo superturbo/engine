@@ -10,7 +10,7 @@ group :development do
   gem 'error_highlight', '>= 0.4.0'
 end
 
-group :development, :test do 
+group :development, :test do
   gem 'puma', '~> 6.4.0'
   gem 'rspec-rails', '~> 6.0.1'
   gem 'capybara', '~> 3.40'
@@ -23,12 +23,11 @@ group :development, :test do
   # gem 'locomotivecms_common', github: 'locomotivecms/common', ref: '054505c', require: false
 
   # gem 'locomotivecms_steam', path: '../steam', require: false
-  gem 'locomotivecms_steam', github: 'locomotivecms/steam', ref: '023a424', require: false
+  gem 'locomotivecms_steam', github: 'superturbo/steam', ref: '376c7521', require: false
 end
 
 group :test do
-  gem 'selenium-webdriver', '4.10'
-  gem 'webdrivers', '~> 5.3.1'
+  gem 'selenium-webdriver', '>= 4.28', '< 5'
   gem 'shoulda-matchers', '~> 5.3.0'
   gem 'factory_bot_rails', '~> 6.4.0'
   gem 'json_spec', '~> 1.1.5'

@@ -28,9 +28,6 @@ end
 
 # load './lib/tasks/development_tasks.rake'
 
-require 'webdrivers'
-load 'webdrivers/Rakefile'
-
 # === Travis ===
 task :travis do
   puts "Install Yarn packages"
