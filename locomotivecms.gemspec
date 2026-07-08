@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.files.reject! { |fn| fn.include?('app/javascript') }
 
+  s.required_ruby_version = '>= 3.2' # matches locomotivecms_steam 2.0
+
   s.add_dependency 'rails',                           '>= 7.2.3.1', '< 8'
   s.add_dependency 'rails-html-sanitizer',            '~> 1.6.0'
 

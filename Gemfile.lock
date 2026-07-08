@@ -50,7 +50,7 @@ PATH
 PATH
   remote: .
   specs:
-    locomotivecms (4.2.0.alpha2)
+    locomotivecms (5.0.0.alpha1)
       actionmailer-with-request (~> 0.5.0)
       adomain (~> 0.2.4)
       autoprefixer-rails (~> 10.4.13)
