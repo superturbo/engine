@@ -11,10 +11,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'puma', '~> 6.4.0'
+  gem 'puma', '>= 7.2.1', '< 8'
   gem 'rspec-rails', '~> 6.1'
   gem 'capybara', '~> 3.40'
-  gem "rack", "3.1.8"
+  gem 'rack', '>= 3.1.21', '< 3.2'
 
   # gem 'custom_fields', path: '../custom_fields' # for Developers
   gem 'custom_fields', github: 'locomotivecms/custom_fields', ref: '85e9c1a03c'

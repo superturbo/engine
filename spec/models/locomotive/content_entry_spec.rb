@@ -402,6 +402,15 @@ describe Locomotive::ContentEntry do
         expect(File.exist?(old_another_file_path)).to eq false
       end
 
+      it 'removes the shared file from the disk when the entry is destroyed' do
+        entry.save
+        old_file_path = entry.file.path
+
+        entry.destroy
+
+        expect(File.exist?(old_file_path)).to eq false
+      end
+
     end
 
   end

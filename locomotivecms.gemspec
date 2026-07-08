@@ -21,13 +21,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails',                           '>= 7.2.3.1', '< 8'
   s.add_dependency 'rails-html-sanitizer',            '~> 1.6.0'
 
-  s.add_dependency 'devise',                          '~> 4.9.3'
+  s.add_dependency 'devise',                          '~> 5.0', '>= 5.0.4'
   s.add_dependency 'devise-encryptable',              '~> 0.2.0'
   s.add_dependency 'simple_token_authentication',     '~> 1.18.1'
 
   s.add_dependency 'pundit',                          '~> 2.3.0'
 
-  s.add_dependency 'mongo',                           '~> 2.19.3'
+  s.add_dependency 'mongo',                           '~> 2.24'
   s.add_dependency 'mongoid',                         '~> 8.1'
   s.add_dependency 'mongoid-tree',                    '~> 2.2.0'
   s.add_dependency 'origin',                          '~> 2.3.1'
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails',                      '~> 6.0.0'
   s.add_dependency 'coffee-rails',                    '~> 5.0'
   s.add_dependency 'jquery-rails',                    '~> 4.5.1'
-  s.add_dependency 'jquery-ui-rails',                 '~> 6.0.1'
+  s.add_dependency 'jquery-ui-rails',                 '>= 8.0', '< 9'
   
   s.add_dependency 'flash_cookie_session',            '~> 1.1.6'
   s.add_dependency 'bootstrap-sass',                  '~> 3.4.1'
@@ -72,5 +72,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'grape',                           '~> 2.1.3'
   s.add_dependency 'grape-entity',                    '~> 0.10.0'
 
-  s.add_dependency 'carrierwave',                     '~> 1.3.3'
+  s.add_dependency 'carrierwave',                     '>= 2.2.7', '< 3' # carrierwave-mongoid caps at < 3
 end
