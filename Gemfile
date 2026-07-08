@@ -19,11 +19,10 @@ group :development, :test do
   # gem 'custom_fields', path: '../custom_fields' # for Developers
   gem 'custom_fields', github: 'locomotivecms/custom_fields', ref: '85e9c1a03c'
 
-  # gem 'locomotivecms_common', path: '../common', require: false
-  # gem 'locomotivecms_common', github: 'locomotivecms/common', ref: '054505c', require: false
+  # 0.6.0.alpha2 is not on rubygems yet (steam 2.0 requires it)
+  gem 'locomotivecms_common', path: '../common', require: false
 
-  # gem 'locomotivecms_steam', path: '../steam', require: false
-  gem 'locomotivecms_steam', github: 'superturbo/steam', ref: '376c7521', require: false
+  gem 'locomotivecms_steam', path: '../steam', require: false
 end
 
 group :test do
