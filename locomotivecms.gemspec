@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.files.reject! { |fn| fn.include?('app/javascript') }
 
-  s.add_dependency 'rails',                           '>= 7.1'
+  s.add_dependency 'rails',                           '>= 7.2.3.1', '< 8'
   s.add_dependency 'rails-html-sanitizer',            '~> 1.6.0'
 
   s.add_dependency 'devise',                          '~> 4.9.3'
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'pundit',                          '~> 2.3.0'
 
   s.add_dependency 'mongo',                           '~> 2.19.3'
-  s.add_dependency 'mongoid',                         '~> 8.0.7'
+  s.add_dependency 'mongoid',                         '~> 8.1'
   s.add_dependency 'mongoid-tree',                    '~> 2.2.0'
   s.add_dependency 'origin',                          '~> 2.3.1'
 
@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari-mongoid',                '~> 1.0.2'
   s.add_dependency 'bootstrap-kaminari-views',        '~> 0.0.5'
   s.add_dependency 'responders',                      '~> 3.1.0'
-  s.add_dependency 'rails-i18n',                      '~> 7.0.6'
+  s.add_dependency 'rails-i18n',                      '~> 7.0', '>= 7.0.6'
   s.add_dependency 'jbuilder',                        '~> 2.11'
 
   s.add_dependency 'sprockets-rails',                 '~> 3.4.2'

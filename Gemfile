@@ -12,7 +12,7 @@ end
 
 group :development, :test do
   gem 'puma', '~> 6.4.0'
-  gem 'rspec-rails', '~> 6.0.1'
+  gem 'rspec-rails', '~> 6.1'
   gem 'capybara', '~> 3.40'
   gem "rack", "3.1.8"
 
