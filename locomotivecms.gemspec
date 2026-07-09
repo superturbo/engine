@@ -30,11 +30,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'pundit',                          '~> 2.5'
 
   s.add_dependency 'mongo',                           '~> 2.24'
-  s.add_dependency 'mongoid',                         '~> 8.1'
+  s.add_dependency 'mongoid',                         '>= 8.1', '< 10'
   s.add_dependency 'mongoid-tree',                    '~> 2.3'
   s.add_dependency 'origin',                          '~> 2.3.1'
 
-  s.add_dependency 'custom_fields',                   '~> 2.14.0.alpha1'
+  s.add_dependency 'custom_fields',                   '~> 2.14.0.alpha2'
   s.add_dependency 'locomotivecms_steam',             '~> 2.0.0.alpha1'
 
   s.add_dependency 'slim',                            '~> 5.2'
@@ -62,7 +62,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bazaar',                          '~> 0.0.2'
   s.add_dependency 'json-schema',                     '~> 3.0.0'
 
-  s.add_dependency 'carrierwave-mongoid',             '~> 1.4.0'
+  s.add_dependency 'carrierwave-mongoid',             '>= 1.4', '< 2'
   s.add_dependency 'dragonfly',                       '~> 1.4.0'
   s.add_dependency 'rack-cache',                      '~> 1.17'
 
