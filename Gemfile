@@ -5,7 +5,7 @@ gemspec
 gem 'abbrev'
 
 group :development do
-  gem 'debug', '~> 1.9.2'
+  gem 'debug', '~> 1.11'
   gem 'web-console', '~> 4.2.1'
   gem 'error_highlight', '>= 0.4.0'
 end
@@ -28,10 +28,10 @@ end
 group :test do
   gem 'selenium-webdriver', '>= 4.28', '< 5'
   gem 'shoulda-matchers', '~> 5.3.0'
-  gem 'factory_bot_rails', '~> 6.4.0'
+  gem 'factory_bot_rails', '~> 6.5'
   gem 'json_spec', '~> 1.1.5'
   gem 'database_cleaner-mongoid', '~> 2.0.1'
   gem 'rails-controller-testing'
-  gem 'email_spec', '~> 2.2.1'
+  gem 'email_spec', '~> 2.3'
   gem 'simplecov', require: false
 end
