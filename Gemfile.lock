@@ -76,7 +76,7 @@ PATH
       kaminari-mongoid (~> 1.0.2)
       locomotivecms_steam (~> 2.0.0.alpha1)
       mongo (~> 2.24)
-      mongoid (>= 8.1, < 10)
+      mongoid (>= 8.1, < 9)
       mongoid-tree (~> 2.3)
       multi_json (~> 1.21)
       origin (~> 2.3.1)
