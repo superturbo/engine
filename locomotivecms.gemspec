@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.files.reject! { |fn| fn.include?('app/javascript') }
 
-  s.required_ruby_version = '>= 3.2'
+  s.required_ruby_version = '>= 3.3'
 
   s.add_dependency 'rails',                           '>= 7.2.3.1', '< 8'
   s.add_dependency 'rails-html-sanitizer',            '~> 1.7'
@@ -71,8 +71,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'actionmailer-with-request',       '~> 0.5.0'
   s.add_dependency 'adomain',                         '~> 0.2.4'
 
-  s.add_dependency 'grape',                           '~> 2.1.3'
-  s.add_dependency 'grape-entity',                    '~> 0.10.0'
+  s.add_dependency 'grape',                           '~> 3.3'
+  s.add_dependency 'grape-entity',                    '~> 1.1'
 
   s.add_dependency 'carrierwave',                     '>= 2.2.7', '< 3'
 end
