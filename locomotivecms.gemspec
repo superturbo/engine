@@ -58,9 +58,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'font-awesome-sass',               '~> 6.7'
 
-  s.add_dependency 'highline',                        '~> 2.1.0'
+  s.add_dependency 'highline',                        '~> 3.1'
   s.add_dependency 'bazaar',                          '~> 0.0.2'
-  s.add_dependency 'json-schema',                     '~> 3.0.0'
+  s.add_dependency 'json-schema',                     '~> 6.2'
 
   s.add_dependency 'carrierwave-mongoid',             '>= 1.4', '< 2'
   s.add_dependency 'dragonfly',                       '~> 1.4.0'

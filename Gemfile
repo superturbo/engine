@@ -11,8 +11,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'puma', '>= 7.2.1', '< 8'
-  gem 'rspec-rails', '~> 6.1'
+  gem 'puma', '>= 8.0.2', '< 9'
+  gem 'rspec-rails', '~> 8.0'
   gem 'capybara', '~> 3.40'
   gem 'rack', '>= 3.1.21', '< 3.2'
 
@@ -31,7 +31,7 @@ end
 
 group :test do
   gem 'selenium-webdriver', '>= 4.28', '< 5'
-  gem 'shoulda-matchers', '~> 5.3.0'
+  gem 'shoulda-matchers', '~> 8.0'
   gem 'factory_bot_rails', '~> 6.5'
   gem 'json_spec', '~> 1.1.5'
   gem 'database_cleaner-mongoid', '~> 2.0.1'
