@@ -6,17 +6,6 @@ class RawArray < ::Array
   def resizable?; false; end
 end
 
-module BSON
-  class ObjectId
-    def to_json(*)
-      to_s.to_json
-    end
-    def as_json(*)
-      to_s.as_json
-    end
-  end
-end
-
 module Mongoid #:nodoc:
 
   module Fields
@@ -25,9 +14,9 @@ module Mongoid #:nodoc:
 
       def add_field(name, options = {})
         # FIXME: The Rails ActionView inputs get the value of a field from the <FIELD>_before_type_cast method if it exists.
-        # In Mongoid 7, the Mongoid core team implemented the `_before_type_cast?` / `_before_type_cast` 
+        # In Mongoid 7, the Mongoid core team implemented the `_before_type_cast?` / `_before_type_cast`
         # for ALL the fields including the localized ones.
-        # Incidentally, it breaks the form inputs for localized fields. 
+        # Incidentally, it breaks the form inputs for localized fields.
         # This patch restores the old behavior for localized fiels by implementing the X_came_from_user? method
         # which makes the form inputs use the translated value of a field.
         generated_methods.module_eval do
