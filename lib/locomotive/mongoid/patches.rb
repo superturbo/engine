@@ -92,10 +92,6 @@ module Mongoid #:nodoc:
   end
 
   class Criteria
-    def without_sorting
-      clone.tap { |crit| crit.options.delete(:sort) }
-    end
-
     def to_liquid
       Locomotive::Liquid::Drops::ProxyCollection.new(self)
     end
