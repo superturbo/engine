@@ -119,6 +119,15 @@ describe Locomotive::ContentEntry do
         expect(content_entry._slug).to eq('hello-world') # French
       end
 
+      it 'increments a colliding slug within the active (non-default) locale' do
+        content_type.site.update!(locales: %w(en fr))
+
+        ::Mongoid::Fields::I18n.with_locale(:fr) do
+          build_content_entry(_slug: 'fish-1-2').tap(&:save!)
+          expect(build_content_entry(_slug: 'fish-1-2').tap(&:save!)._slug).to eq('fish-1-3')
+        end
+      end
+
     end
 
   end

@@ -13,8 +13,8 @@ module Locomotive
     end
 
     initializer 'locomotive.mongoid' do
-      # https://jira.mongodb.org/browse/MONGOID-5260?jql=text%20~%20%22pluck%20localized%22
-      ::Mongoid.legacy_pluck_distinct = true
+      # Return localized pluck values for the active locale instead of translation hashes.
+      ::Mongoid.legacy_pluck_distinct = false
     end
 
     initializer 'locomotive.params.filter' do |app|
