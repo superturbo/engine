@@ -177,6 +177,25 @@ describe Locomotive::ContentEntry do
 
   end
 
+  describe 'position assignment' do
+
+    it 'assigns the next bottom position to a new entry' do
+      entries = Array.new(3) { create_content_entry }
+
+      expect(entries.map(&:_position)).to eq([0, 1, 2])
+    end
+
+    it 'scopes the position to the content type' do
+      3.times { create_content_entry }
+
+      other_type  = create('article content type', site: site, slug: 'news')
+      first_entry = other_type.entries.create!(title: 'First', _label_field_name: 'title')
+
+      expect(first_entry._position).to eq(0)
+    end
+
+  end
+
   describe "#navigation" do
 
     before(:each) { content_type.update_attribute :order_by, '_position' }

@@ -12,32 +12,6 @@ describe 'Locomotive Mongoid Criteria extensions' do
     end
   end
 
-  describe '#indexed_max' do
-    it 'returns the maximum value of the field across the collection' do
-      3.times { create_entry }
-
-      expect(content_type.entries.indexed_max(:_position)).to eq(2)
-    end
-
-    it 'respects the criteria selector' do
-      create_entry(visible: true)
-      create_entry(visible: true)
-      create_entry(visible: false)
-
-      expect(content_type.entries.where(visible: true).indexed_max(:_position)).to eq(1)
-    end
-
-    it 'returns nil when the collection is empty' do
-      expect(content_type.entries.indexed_max(:_position)).to be_nil
-    end
-
-    it 'drives add_to_list_bottom to assign the next bottom position on create' do
-      entries = Array.new(3) { create_entry }
-
-      expect(entries.map(&:_position)).to eq([0, 1, 2])
-    end
-  end
-
   describe '#each_by' do
     it 'yields every matching document exactly once, in order' do
       5.times { create_entry }
