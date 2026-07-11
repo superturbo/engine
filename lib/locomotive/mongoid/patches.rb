@@ -141,13 +141,6 @@ module Mongoid #:nodoc:
     end
   end
 
-  module Criterion
-    class Selector < Hash
-      # for some reason, the store method behaves differently than the []= one, causing regression bugs (query not localized)
-      alias :store :[]=
-    end
-  end
-
   # make the validators work with localized field
   module Validatable #:nodoc:
 
