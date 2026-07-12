@@ -5,6 +5,9 @@ module Locomotive
     devise *Locomotive.config.devise_modules
     include Locomotive::Concerns::Account::APIKey
 
+    # Raised when the credentials passed to create_api_token do not authenticate.
+    class AuthenticationError < StandardError; end
+
     ## devise fields (need to be declared since 2.x) ##
     field :remember_created_at,     type: Time
     field :email,                   type: String, default: ''

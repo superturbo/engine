@@ -36,14 +36,18 @@ describe Locomotive::API::Resources::TokenResource do
   end
 
   describe 'credential error responses' do
-    it 'returns the same response for a wrong password and an unknown email' do
-      post(url, email: account.email, password: 'wrong')
-      wrong_password = [last_response.status, last_response.body, last_response.headers['X-Error-Detail']]
+    it 'answers every invalid credential combination identically' do
+      responses = [
+        { email: account.email,        password: 'wrong'   },
+        { email: 'nobody@example.com', password: 'easyone' },
+        { email: account.email,        api_key:  'bad-key' },
+        { email: account.email }
+      ].map do |request_params|
+        post(url, request_params)
+        [last_response.status, last_response.body, last_response.headers['X-Error-Detail']]
+      end
 
-      post(url, email: 'nobody@example.com', password: 'easyone')
-      unknown_email = [last_response.status, last_response.body, last_response.headers['X-Error-Detail']]
-
-      expect(unknown_email).to eq(wrong_password)
+      expect(responses.uniq.size).to eq 1
     end
   end
 
@@ -91,6 +95,21 @@ describe Locomotive::API::Resources::TokenResource do
       expect(parsed_response['token']).to be_present
       expect(parsed_response['token']).to eq first_token
       expect(parsed_response['token']).to eq account.reload.authentication_token
+    end
+  end
+
+  describe 'error boundary' do
+    it 'lets an unexpected error surface as a 5xx, not a 401' do
+      allow(Locomotive::Account).to receive(:create_api_token).and_raise(StandardError, 'boom')
+      post(url, email: account.email, password: 'easyone')
+      expect(last_response.status).to eq 500
+    end
+
+    it 'answers a failed credential with a uniform 401 and no internal detail' do
+      post(url, email: account.email, password: 'wrong')
+      expect(last_response.status).to eq 401
+      expect(parsed_response).to eq('error' => 'Invalid credentials')
+      expect(last_response.headers).not_to have_key('X-Error-Detail')
     end
   end
 
