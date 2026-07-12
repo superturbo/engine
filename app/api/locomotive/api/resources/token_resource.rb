@@ -18,7 +18,6 @@ module Locomotive
             end
           end
 
-          # stub destroy Account#invalidate_api_token(token)
         end
 
       end

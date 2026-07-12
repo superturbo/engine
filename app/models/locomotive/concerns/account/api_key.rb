@@ -71,23 +71,6 @@ module Locomotive
             account.authentication_token
           end
 
-          # Logout the user responding to the token passed in parameter from the API.
-          # An exception is raised if no account corresponds to the token.
-          #
-          # @param [ String ] token The API token created by the create_api_token method.
-          #
-          # @return [ String ] The API token
-          #
-          def invalidate_api_token(token)
-            account = self.where(authentication_token: token).first
-
-            raise 'Invalid token.' if account.nil?
-
-            account.reset_authentication_token!
-
-            token
-          end
-
         end
 
       end
