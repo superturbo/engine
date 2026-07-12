@@ -118,6 +118,16 @@ describe Locomotive::API::Resources::AccountResource do
         expect(account.reload.name).to eq('Renamed')
         expect(account.api_key).to eq(original)
       end
+
+      it 'updates allowed attributes but drops a forged authentication_token' do
+        original = account.authentication_token
+
+        put "#{url_prefix}/#{account.id}.json", account: { name: 'Renamed', authentication_token: 'forged' }
+
+        expect(last_response).to be_successful
+        expect(account.reload.name).to eq('Renamed')
+        expect(account.authentication_token).to eq(original)
+      end
     end
   end
 
