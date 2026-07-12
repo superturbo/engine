@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'devise',                          '~> 5.0', '>= 5.0.4'
   s.add_dependency 'devise-encryptable',              '~> 0.3'
-  s.add_dependency 'simple_token_authentication',     '~> 1.18.1'
 
   s.add_dependency 'pundit',                          '~> 2.5'
 

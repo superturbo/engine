@@ -4,8 +4,6 @@ gemspec
 
 gem 'abbrev'
 
-gem 'simple_token_authentication', git: 'https://github.com/gonzalo-bulnes/simple_token_authentication.git', ref: 'f1cba4e3e614932ffcb6dfd2d8bf03acd64cb1ec'
-
 group :development do
   gem 'debug', '~> 1.11'
   gem 'web-console', '~> 4.2.1'

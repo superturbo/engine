@@ -41,6 +41,16 @@ describe 'API token authentication' do
       expect(last_response.status).to eq 401
     end
 
+    it 'ignores a stale unsafe flag and rejects the legacy auth_token parameter' do
+      Locomotive.config.unsafe_token_authentication = true
+
+      get "#{my_account_url}?auth_token=#{account.authentication_token}"
+
+      expect(last_response.status).to eq 401
+    ensure
+      Locomotive::Configuration.settings.delete(:unsafe_token_authentication)
+    end
+
     context 'with a valid token but the wrong email' do
       it 'rejects a missing email with 401' do
         header 'X-Locomotive-Account-Token', token
