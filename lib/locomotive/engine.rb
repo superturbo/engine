@@ -12,11 +12,6 @@ module Locomotive
       end
     end
 
-    initializer 'locomotive.mongoid' do
-      # Return localized pluck values for the active locale instead of translation hashes.
-      ::Mongoid.legacy_pluck_distinct = false
-    end
-
     initializer 'locomotive.params.filter' do |app|
       # Do not log remote_<field>_url params because they can contain huge base64 string
       app.config.filter_parameters += [/\Aremote_.+_url\Z/]

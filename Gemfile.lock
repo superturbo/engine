@@ -76,7 +76,7 @@ PATH
       kaminari-mongoid (~> 1.0.2)
       locomotivecms_steam (~> 2.0.0.alpha1)
       mongo (~> 2.24)
-      mongoid (>= 8.1, < 9)
+      mongoid (>= 9.1.0, < 10)
       mongoid-tree (~> 2.3)
       multi_json (~> 1.21)
       origin (~> 2.3.1)
@@ -394,11 +394,11 @@ GEM
     mongo (2.24.1)
       base64
       bson (>= 4.14.1, < 6.0.0)
-    mongoid (8.1.12)
-      activemodel (>= 5.1, < 8.1, != 7.0.0)
+    mongoid (9.1.0)
+      activemodel (>= 5.1, < 8.2, != 7.0.0)
       concurrent-ruby (>= 1.0.5, < 2.0)
       mongo (>= 2.18.0, < 3.0.0)
-      ruby2_keywords (~> 0.0.5)
+      ostruct
     mongoid-grid_fs (2.6.0)
       mime-types (>= 1.0, < 4.0)
       mongoid (>= 3.0, < 10.0)
@@ -529,7 +529,6 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
-    ruby2_keywords (0.0.5)
     rubyzip (3.4.1)
     sanitize (7.0.0)
       crass (~> 1.0.2)

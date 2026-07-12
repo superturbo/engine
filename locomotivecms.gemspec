@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'pundit',                          '~> 2.5'
 
   s.add_dependency 'mongo',                           '~> 2.24'
-  s.add_dependency 'mongoid',                         '>= 8.1', '< 9'
+  s.add_dependency 'mongoid',                         '>= 9.1.0', '< 10'
   s.add_dependency 'mongoid-tree',                    '~> 2.3'
   s.add_dependency 'origin',                          '~> 2.3.1'
 

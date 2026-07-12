@@ -9,7 +9,7 @@ module Locomotive
         next unless field = find_metafield_in(namespace_name, name)
 
         if field['localized']
-          (namespace[name] ||= {})[locale] = value
+          namespace[name] = (namespace[name] || {}).merge(locale.to_s => value)
         else
           namespace[name] = value
         end
