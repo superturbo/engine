@@ -2,7 +2,7 @@ PATH
   remote: ../common
   specs:
     locomotivecms_common (0.6.0.alpha2)
-      activesupport (>= 7.2.3.1, < 8)
+      activesupport (>= 7.2.3.1, < 9)
       attr_extras (~> 7.1.0)
       colorize
       stringex (~> 2.8.5)
@@ -11,7 +11,7 @@ PATH
   remote: ../custom_fields
   specs:
     custom_fields (2.14.0.alpha2)
-      activesupport (>= 7, < 8.0)
+      activesupport (>= 7, < 8.2)
       bcrypt (~> 3.1.18)
       carrierwave (>= 2.2.7, < 3)
       carrierwave-mongoid (>= 1.4, < 2)
