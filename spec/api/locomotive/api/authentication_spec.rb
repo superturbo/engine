@@ -99,16 +99,47 @@ describe 'API token authentication' do
     end
   end
 
-  describe 'tenant scope (site-scoped endpoint)' do
-    let!(:site)   { create(:site) }
-    let!(:member) { create(:account) }
-    let!(:_admin) { create(:admin, account: member, site: site, role: 'admin') }
+  describe 'tenant scope (site-scoped endpoints require a membership)' do
+    let!(:site)          { create(:site) }
+    let!(:member)        { create(:account) }
+    let!(:_membership)   { create(:admin, account: member, site: site, role: 'admin') }
+    let!(:other_site)    { create(:site, handle: 'tenant_b') }
+    let!(:outsider)      { create(:account) }
+    let!(:_outsider_mem) { create(:admin, account: outsider, site: other_site, role: 'admin') }
+    let!(:super_admin)   { create(:account, super_admin: true) }
+    let!(:content_type)  { create(:content_type, :article, site: site) }
+    let!(:page)          { create(:page, :index, site: site) }
 
-    it 'lets a member of the site through' do
-      header 'X-Locomotive-Site-Handle', site.handle
-      authenticate_as(member.email, member.authentication_token)
-      get "/locomotive/#{site.handle}/api/v3/current_site.json"
-      expect(last_response.status).to eq 200
+    let(:current_site_path) { "/locomotive/#{site.handle}/api/v3/current_site.json" }
+    let(:page_path)         { "/locomotive/#{site.handle}/api/v3/pages/#{page.id}.json" }
+    let(:content_type_path) { "/locomotive/#{site.handle}/api/v3/content_types/#{content_type.id}.json" }
+
+    def read_status(account, path)
+      authenticate_as(account.email, account.authentication_token)
+      get path
+      last_response.status
+    end
+
+    context 'an account with no membership to the site' do
+      it 'is rejected from current_site with 401' do
+        expect(read_status(outsider, current_site_path)).to eq 401
+      end
+
+      it 'is rejected from a non-hidden page with 401' do
+        expect(read_status(outsider, page_path)).to eq 401
+      end
+
+      it 'is rejected from a non-hidden content type with 401' do
+        expect(read_status(outsider, content_type_path)).to eq 401
+      end
+    end
+
+    it 'lets a member of the site read current_site' do
+      expect(read_status(member, current_site_path)).to eq 200
+    end
+
+    it 'lets a super admin without a membership read current_site' do
+      expect(read_status(super_admin, current_site_path)).to eq 200
     end
   end
 
