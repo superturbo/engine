@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 3.3'
 
-  s.add_dependency 'rails',                           '>= 7.2.3.1', '< 8'
+  s.add_dependency 'rails',                           '>= 8.1.0', '< 8.2'
   s.add_dependency 'rails-html-sanitizer',            '~> 1.7'
 
   s.add_dependency 'devise',                          '~> 5.0', '>= 5.0.4'
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari-mongoid',                '~> 1.0.2'
   s.add_dependency 'bootstrap-kaminari-views',        '~> 0.0.5'
   s.add_dependency 'responders',                      '~> 3.2'
-  s.add_dependency 'rails-i18n',                      '~> 7.0', '>= 7.0.6'
+  s.add_dependency 'rails-i18n',                      '>= 8.0.0', '< 9'
   s.add_dependency 'jbuilder',                        '~> 2.11'
 
   s.add_dependency 'sprockets-rails',                 '~> 3.5'
