@@ -27,6 +27,29 @@ describe Locomotive::Concerns::Site::Metafields do
 
   end
 
+  describe 'metafields=' do
+
+    let(:json) do
+      {
+        contacts: {
+          phone:   '+1 202 555 0143',
+          website: 'https://example.test/a%20b'
+        }
+      }.to_json
+    end
+
+    subject do
+      site.metafields = json
+      site.metafields
+    end
+
+    it 'preserves a leading + and any percent-sequence in the stored values' do
+      expect(subject['contacts']['phone']).to eq('+1 202 555 0143')
+      expect(subject['contacts']['website']).to eq('https://example.test/a%20b')
+    end
+
+  end
+
   describe 'schema validation' do
 
     subject { site.valid?; site.errors[:metafields_schema] }
