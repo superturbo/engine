@@ -224,7 +224,7 @@ describe Locomotive::ContentEntry do
 
     context "ordered by published at" do
 
-      before(:each) { content_type.update_attributes order_by: 'published_at', order_direction: 'asc' }
+      before(:each) { content_type.update order_by: 'published_at', order_direction: 'asc' }
 
       let!(:very_first) { create_content_entry(title: 'very first', _position: 4, published_at: Time.now, visible: true) }
 

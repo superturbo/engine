@@ -97,7 +97,7 @@ describe Locomotive::Steam::LiquidParserWithCacheService do
       template.render(::Liquid::Context.new({}, {}, registers, true))
     end
 
-    before { home.update_attributes(raw_template: 'HDR {% block main %}default{% endblock %} FTR') }
+    before { home.update(raw_template: 'HDR {% block main %}default{% endblock %} FTR') }
 
     it 'writes the parsed template in the cache and renders the same output from a cache hit' do
       cold_output = render_cached_template(service.parse(decorated_page))
