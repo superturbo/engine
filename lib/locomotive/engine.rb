@@ -13,8 +13,8 @@ module Locomotive
     end
 
     initializer 'locomotive.params.filter' do |app|
-      # Do not log remote_<field>_url params because they can contain huge base64 string
-      app.config.filter_parameters += [/\Aremote_.+_url\Z/]
+      # Filter engine credentials and potentially large remote upload payloads.
+      app.config.filter_parameters += [:password, :api_key, :token, /\Aremote_.+_url\Z/]
     end
 
     initializer 'locomotive.action_controller' do |app|
