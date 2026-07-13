@@ -99,10 +99,13 @@ describe Locomotive::API::Resources::TokenResource do
   end
 
   describe 'error boundary' do
-    it 'lets an unexpected error surface as a 5xx, not a 401' do
+    it 'returns a generic 500 for an unexpected error' do
       allow(Locomotive::Account).to receive(:create_api_token).and_raise(StandardError, 'boom')
+
       post(url, email: account.email, password: 'easyone')
+
       expect(last_response.status).to eq 500
+      expect(parsed_response).to eq('error' => 'Internal server error')
     end
 
     it 'answers a failed credential with a uniform 401 and no internal detail' do
