@@ -34,13 +34,10 @@ Locomotive.configure do |config|
   # back-office to https in production.
   # config.enable_admin_ssl = Rails.env.production?
 
-  # Configure the e-mail address which will be shown in the DeviseMailer, NotificationMailer, ...etc
-  # if you do not put the domain name in the email, Locomotive will take the default domain name depending
-  # on your deployment target (server, Heroku, Bushido, ...etc)
-  #
-  # Ex:
-  # config.mailer_sender = 'support'
-  config.mailer_sender = 'support@dummy.com'
+  # Configure the sender for account emails and site notifications that use the
+  # application's mail delivery method.
+  # Use a full email address; a display name is allowed.
+  config.mailer_sender = 'support@example.com'
 
   # Set to false to require site-specific SMTP settings for site notifications.
   # config.allow_site_notifications_via_application_delivery_method = true

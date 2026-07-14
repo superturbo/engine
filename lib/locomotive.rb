@@ -38,7 +38,10 @@ module Locomotive
   def self.after_configure
     # Devise
     mail_address = self.config.mailer_sender
-    ::Devise.mailer_sender = mail_address =~ /.+@.+/ ? mail_address : "#{mail_address}@#{Locomotive.config.domain}"
+    unless valid_mailer_sender?(mail_address)
+      raise ArgumentError, "Locomotive.config.mailer_sender must be a full email address (got #{mail_address.inspect})"
+    end
+    ::Devise.mailer_sender = mail_address
 
     # Check for outdated Dragonfly config
     if ::Dragonfly::VERSION =~ /^0\.9\.([0-9]+)/
@@ -48,6 +51,14 @@ module Locomotive
     # avoid I18n warnings
     I18n.enforce_available_locales = false
   end
+
+  def self.valid_mailer_sender?(value)
+    address = Mail::Address.new(value.to_s)
+    address.address.present? && address.domain.present?
+  rescue Mail::Field::ParseError
+    false
+  end
+  private_class_method :valid_mailer_sender?
 
   def self.log(*args)
     level   = args.size == 1 ? 'info' : args.first
