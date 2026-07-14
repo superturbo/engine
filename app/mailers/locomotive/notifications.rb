@@ -60,8 +60,8 @@ module Locomotive
     def set_delivery_options
       smtp_settings = site_mailer_settings.slice(*SMTP_ATTRIBUTES).delete_if { |_, value| value.blank? }.symbolize_keys
 
-      if smtp_settings && smtp_settings[:address].present?
-        mail.delivery_method.settings = smtp_settings
+      if smtp_settings[:address].present?
+        mail.delivery_method(:smtp, smtp_settings)
       end
     end
 

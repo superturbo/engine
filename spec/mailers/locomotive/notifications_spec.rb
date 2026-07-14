@@ -76,7 +76,7 @@ describe Locomotive::Notifications do
       } } }
 
       it 'uses the site SMTP settings to deliver emails' do
-        expect(mail.delivery_method.settings).to eq({
+        expected_settings = {
           address: 'smtp.acme.com',
           authentication: 'plain',
           port: 587,
@@ -84,7 +84,9 @@ describe Locomotive::Notifications do
           user_name: 'john',
           password: 'easyone',
           domain: 'acme.com'
-        })
+        }
+        expect(mail.delivery_method).to be_a(Mail::SMTP)
+        expect(mail.delivery_method.settings.slice(*expected_settings.keys)).to eq(expected_settings)
       end
 
       it 'uses the from parameter for the sender email' do
