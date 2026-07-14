@@ -51,7 +51,6 @@ PATH
   specs:
     locomotivecms (5.0.0.alpha1)
       actionmailer-with-request (~> 0.5.0)
-      adomain (~> 0.2.4)
       autoprefixer-rails (~> 10.4.13)
       bazaar (~> 0.0.2)
       bootstrap-kaminari-views (~> 0.0.5)
@@ -174,9 +173,6 @@ GEM
       uri (>= 0.13.1)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
-    adomain (0.2.4)
-      addressable (~> 2.5)
-      logger
     ast (2.4.3)
     attr_extras (7.1.0)
     autoprefixer-rails (10.4.21.0)
