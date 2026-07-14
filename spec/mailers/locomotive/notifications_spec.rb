@@ -52,8 +52,8 @@ describe Locomotive::Notifications do
         expect(mail.body.encoded).to match('<b>www.acme.com</b>')
       end
 
-      it 'uses the top level domain name for the sender email' do
-        expect(mail.from).to eq(['noreply@acme.com'])
+      it 'uses the application sender regardless of the site domain' do
+        expect(mail.from).to eq(['support@dummy.com'])
       end
 
       it 'uses the default SMTP settings to deliver emails' do
@@ -95,6 +95,59 @@ describe Locomotive::Notifications do
 
     end
 
+    context 'the site has SMTP settings but no from address' do
+
+      let(:metafields) { { 'mailer_settings' => { 'address' => 'smtp.acme.com', 'port' => '587', 'password' => 'topsecret' } } }
+
+      it 'does not deliver the email' do
+        expect { mail.deliver_now }.not_to change { ActionMailer::Base.deliveries.count }
+        expect(mail.perform_deliveries).to be(false)
+      end
+
+      it 'reports the skip without exposing delivery details' do
+        line = skip_log_line
+        expect(line).to be_present
+        expect(line).to include('site SMTP settings without a from address')
+        expect(line).to include(site._id.to_s)
+        expect(line).not_to include(account.email)
+        expect(line).not_to include('smtp.acme.com')
+        expect(line).not_to include('topsecret')
+      end
+
+    end
+
+    context 'the site has SMTP settings but an invalid from address' do
+
+      let(:metafields) { { 'mailer_settings' => { 'address' => 'smtp.acme.com', 'port' => '587', 'from' => 'not-an-email' } } }
+
+      it 'does not deliver the email' do
+        expect { mail.deliver_now }.not_to change { ActionMailer::Base.deliveries.count }
+        expect(mail.perform_deliveries).to be(false)
+      end
+
+      it 'reports the skip without leaking the invalid address or delivery details' do
+        line = skip_log_line
+        expect(line).to be_present
+        expect(line).to include('invalid site from address')
+        expect(line).to include(site._id.to_s)
+        expect(line).not_to include('not-an-email')
+        expect(line).not_to include(account.email)
+        expect(line).not_to include('smtp.acme.com')
+      end
+
+    end
+
+    context 'the site has a from address but no SMTP settings' do
+
+      let(:metafields) { { 'mailer_settings' => { 'from' => 'support@acme.com' } } }
+
+      it 'sends through the application transport using the application sender' do
+        expect(mail.from).to eq(['support@dummy.com'])
+        expect { mail.deliver_now }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
+    end
+
     describe 'application delivery method policy' do
 
       before do
@@ -118,14 +171,10 @@ describe Locomotive::Notifications do
           expect { mail.deliver_now }.not_to change { ActionMailer::Base.deliveries.count }
         end
 
-        it 'reports the skip to the Locomotive log with the site id and no recipient' do
-          logged = []
-          allow(Locomotive::Common::Logger).to receive(:warn) { |message| logged << message.to_s }
-
-          mail.deliver_now
-
-          line = logged.find { |m| m.include?('[Notifications] skipped') }
+        it 'reports the skip to the Locomotive log with the reason, site id and no recipient' do
+          line = skip_log_line
           expect(line).to be_present
+          expect(line).to include('no site SMTP settings')
           expect(line).to include(site._id.to_s)
           expect(line).not_to include(account.email)
         end
@@ -222,6 +271,13 @@ describe Locomotive::Notifications do
 
   def set_timezone(&block)
     Time.use_zone(site.try(:timezone) || 'UTC', &block)
+  end
+
+  def skip_log_line
+    logged = []
+    allow(Locomotive::Common::Logger).to receive(:warn) { |message| logged << message.to_s }
+    mail.deliver_now
+    logged.find { |m| m.include?('[Notifications] skipped') }
   end
 
 end
