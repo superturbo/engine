@@ -42,6 +42,9 @@ Locomotive.configure do |config|
   # config.mailer_sender = 'support'
   config.mailer_sender = 'support@dummy.com'
 
+  # Set to false to require site-specific SMTP settings for site notifications.
+  # config.allow_site_notifications_via_application_delivery_method = true
+
   # Add the checksum of a theme asset at the end of its path to allow public caching.
   # By default, it's disabled.
   #

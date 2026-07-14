@@ -95,6 +95,64 @@ describe Locomotive::Notifications do
 
     end
 
+    describe 'application delivery method policy' do
+
+      before do
+        allow(Locomotive.config)
+          .to receive(:allow_site_notifications_via_application_delivery_method)
+          .and_return(allowed)
+      end
+
+      context 'allowed and no site SMTP' do
+        let(:allowed) { true }
+
+        it 'delivers via the application delivery method' do
+          expect { mail.deliver_now }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end
+      end
+
+      context 'disallowed and no site SMTP' do
+        let(:allowed) { false }
+
+        it 'does not deliver' do
+          expect { mail.deliver_now }.not_to change { ActionMailer::Base.deliveries.count }
+        end
+
+        it 'reports the skip to the Locomotive log with the site id and no recipient' do
+          logged = []
+          allow(Locomotive::Common::Logger).to receive(:warn) { |message| logged << message.to_s }
+
+          mail.deliver_now
+
+          line = logged.find { |m| m.include?('[Notifications] skipped') }
+          expect(line).to be_present
+          expect(line).to include(site._id.to_s)
+          expect(line).not_to include(account.email)
+        end
+      end
+
+      context 'disallowed and the site provides only a from address' do
+        let(:allowed)    { false }
+        let(:metafields) { { 'mailer_settings' => { 'from' => 'support@acme.com' } } }
+
+        it 'does not treat a from address as a delivery method' do
+          expect { mail.deliver_now }.not_to change { ActionMailer::Base.deliveries.count }
+        end
+      end
+
+      context 'disallowed but the site has its own SMTP settings' do
+        let(:allowed)    { false }
+        let(:metafields) { { 'mailer_settings' => { 'address' => 'smtp.acme.com', 'port' => '587', 'from' => 'support@acme.com' } } }
+
+        it 'keeps site SMTP delivery enabled' do
+          expect(mail.delivery_method).to be_a(Mail::SMTP)
+          expect(mail.delivery_method.settings.slice(:address, :port)).to eq(address: 'smtp.acme.com', port: 587)
+          expect(mail.perform_deliveries).to be(true)
+        end
+      end
+
+    end
+
     describe 'rendering based on field types' do
 
       describe 'text type' do

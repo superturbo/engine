@@ -62,6 +62,11 @@ module Locomotive
 
       if smtp_settings[:address].present?
         mail.delivery_method(:smtp, smtp_settings)
+      elsif !Locomotive.config.allow_site_notifications_via_application_delivery_method
+        mail.perform_deliveries = false
+        Locomotive::Common::Logger.warn(
+          "[Notifications] skipped for site #{@site._id} (#{action_name}): no site SMTP settings".yellow
+        )
       end
     end
 
