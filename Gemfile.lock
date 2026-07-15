@@ -326,9 +326,6 @@ GEM
     json-schema (6.2.0)
       addressable (~> 2.8)
       bigdecimal (>= 3.1, < 5)
-    json_spec (1.1.5)
-      multi_json (~> 1.0)
-      rspec (>= 2.0, < 4.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -493,10 +490,6 @@ GEM
       actionpack (>= 7.0)
       railties (>= 7.0)
     rexml (3.4.4)
-    rspec (3.13.2)
-      rspec-core (~> 3.13.0)
-      rspec-expectations (~> 3.13.0)
-      rspec-mocks (~> 3.13.0)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -597,7 +590,6 @@ DEPENDENCIES
   email_spec (~> 2.3)
   error_highlight (>= 0.4.0)
   factory_bot_rails (~> 6.5)
-  json_spec (~> 1.1.5)
   locomotivecms!
   locomotivecms_common!
   locomotivecms_steam!
