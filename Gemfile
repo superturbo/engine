@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'abbrev'
-
 group :development do
   gem 'debug', '~> 1.11'
   gem 'web-console', '~> 4.3.0'
